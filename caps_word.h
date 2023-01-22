@@ -7,4 +7,4 @@
 
 bool process_caps_word(uint16_t keycode, keyrecord_t* record);
 
-bool get_shifted_state();
+bool get_shifted_state(void);

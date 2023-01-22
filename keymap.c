@@ -26,7 +26,6 @@ bool is_a_layer_locked = false;
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* COLEMAK
-/*
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * | ALT  |  Q   |  W   |  F   |  P   |  B   |                    |  J   |  L   |  U   |  Y   |  ;   |  -   |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
@@ -39,14 +38,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                          '---------------------'           '--------------------'
  */
 
-[_COLEMAK] = LAYOUT( \
+[_COLEMAK] = LAYOUT_split_3x6_3( \
   KC_LALT,   KC_Q,   KC_W,    KC_F,    KC_P,    KC_B,                     KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN , KC_MINS, \
-  KC_LCRTL, KC_A,   KC_R,    KC_S,    KC_T,    KC_G,                     KC_M,    KC_N,    KC_E,    KC_I,    KC_O    , KC_QUOT,\
+  KC_LCTL, KC_A,   KC_R,    KC_S,    KC_T,    KC_G,                     KC_M,    KC_N,    KC_E,    KC_I,    KC_O    , KC_QUOT,\
   KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_D,    KC_V,                     KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH , KC_RSFT,\
         LT(MEDIA, KC_ESC), LT(NAV, KC_TAB), KC_SPC , LT(SYM, KC_ENT), LT(NUM, KC_BSPC), LT(FUN, KC_DEL)                       
 ),
 /* QWERTY
-/*
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * | ALT  |   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  |  -   |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
@@ -59,14 +57,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                          '---------------------'           '--------------------'
  */
 
- [_QWERTY] = LAYOUT( \
+ [_QWERTY] = LAYOUT_split_3x6_3( \
   KC_LALT,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS, \
-  KC_LCTRL, KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, \
+  KC_LCTL, KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, \
   KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B,                     KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,  KC_RSFT, \
                            _______, _______, _______, _______,  _______, _______
 ),
 /* GAME
-/*
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * | Tab  |   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  |  -   |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
@@ -79,12 +76,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                          '---------------------'           '--------------------'
  */
 
- [_GAME] = LAYOUT( \
+ [_GAME] = LAYOUT_split_3x6_3( \
   KC_TAB  ,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS, \
-  KC_LCTRL,   KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, \
+  KC_LCTL,   KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, \
   KC_LSFT,    KC_Z,   KC_X,    KC_C,    KC_V,    KC_B,                      KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,  KC_RSFT, \
-                                KC_ESC, KC_LALT, KC_SPC, KC_ENTR,  KC_BSPC, KC_DEL\
+                                KC_ESC, KC_LALT, KC_SPC, KC_ENT,  KC_BSPC, _______
 ),
+// Need the del key to be transparent so we can use the func layer
 
 // NAV
 /*
@@ -99,11 +97,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                          |      |      |/       /         \      \ |      |      |
  *                          '---------------------'           '--------------------'
  */
-[NAV] = LAYOUT(\
+[NAV] = LAYOUT_split_3x6_3(\
     U_NU, U_NU,    U_NU,    U_NU,    U_NU,    U_NU,                KC_AGIN, KC_PSTE, KC_UP,   KC_CUT,  KC_UNDO, U_NU, \
     U_NU, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, LLOCK,               KC_CAPS, KC_LEFT, KC_DOWN, KC_RGHT, KC_COPY, U_NU, \
-    U_NU, KC_RGUI, KC_RALT, KC_RCTL, KC_RSFT, U_NU,                KC_INS,  KC_HOME, KC_PGUP, KC_PGDW, KC_END,  U_NU, \
-                                     U_NA,    U_NA, U_NA, KC_ENT,  KC_BSPC, KC_DEL,
+    U_NU, KC_RGUI, KC_RALT, KC_RCTL, KC_RSFT, U_NU,                KC_INS,  KC_HOME, KC_PGUP, KC_PGDN, KC_END,  U_NU, \
+                                     U_NA,    U_NA, U_NA, KC_ENT,  KC_BSPC, KC_DEL
     ),
 
 //NUMBER
@@ -119,11 +117,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                          |      |      |/       /         \      \ |      |      |
  *                          '---------------------'           '--------------------'
  */
-[NUM] = LAYOUT(
+[NUM] = LAYOUT_split_3x6_3(
     KC_TRNS,KC_LBRC, KC_7,    KC_8,    KC_9,    KC_RBRC,         U_NU,    U_NU,    U_NU,    U_NU,    U_NU,    U_NU, \
     KC_TRNS,KC_SCLN, KC_4,    KC_5,    KC_6,    KC_EQL,          LLOCK,   KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, U_NU,\
     KC_TRNS,KC_PLUS, KC_1,    KC_2,    KC_3,    KC_BSLS,         U_NA,    KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, U_NU,\
-                                KC_DOT,  KC_0,    KC_MINS, U_NA,    U_NA,    U_NA, \
+                                KC_DOT,  KC_0,    KC_MINS, U_NA,    U_NA,    U_NA
   ),
 
 /* SYMBOLs
@@ -138,11 +136,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                   |      |      |      |/       /         \      \ |      |      |      |
  *                   `----------------------------'           '------''--------------------'
  */
-[SYM] = LAYOUT(
+[SYM] = LAYOUT_split_3x6_3(
     KC_BSLS, KC_CIRC, KC_ASTR, KC_LBRC, KC_RBRC, KC_AMPR,           U_NA,    U_NA,    U_NA,    U_NA,    U_NA,    U_NU, \
     KC_TILD, KC_COLN, KC_UNDS, KC_LPRN, KC_RPRN, KC_SLSH,           LLOCK,   KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, U_NU, \
     KC_GRV,  KC_AT,   KC_EXLM, KC_PLUS, KC_EQL , KC_PIPE,           U_NA,    KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, U_NU,\
-                               KC_PERC, KC_DLR , KC_HASH,           U_NA,    U_NA,    U_NA, \
+                               KC_PERC, KC_DLR , KC_HASH,           U_NA,    U_NA,    U_NA
     ),
 
 //MEDIA
@@ -158,11 +156,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                          |      |      |/       /         \      \ |      |      |
  *                          '---------------------'           '--------------------'
  */
-[MEDIA] = LAYOUT(
+[MEDIA] = LAYOUT_split_3x6_3(
     U_NU ,U_NU,    U_NU,    U_NU,    U_NU,    U_NU,             U_NU,    U_WINLK, U_NU,    U_NU,    U_NU,    U_NU , \
     U_NU ,KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, LLOCK,            U_NU,    KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, U_NU , \
     U_NU, KC_RGUI, KC_RALT, KC_RCTL, KC_RSFT, U_NU,             U_NU,    U_NU,    U_NU,    U_NU,    U_NU,    U_NU , \
-                            U_NA,    U_NA,    U_NA,         KC_MSTP, KC_MPLY, KC_MUTE, \
+                            U_NA,    U_NA,    U_NA,         KC_MSTP, KC_MPLY, KC_MUTE
     ),
 
 //FUNCTION
@@ -170,7 +168,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * |      |  F12 |  F7  |  F8  |  F9  | PSCR |                    |      |      |      |      |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |  F11 |  F4  |  F5  |  F6  | SLCK |                    | LOCK | LSFT | LCTRL| LALT | LGUI |      |
+ * |      |  F11 |  F4  |  F5  |  F6  |      |                    | LOCK | LSFT | LCTRL| LALT | LGUI |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |      |  F10 |  F1  |  F2  |  F3  | PAUSE|                    |      | RSFT | RCTRL| RALT | RGUI |      |
  * `-----------------------------------------/-------.     .------\-----------------------------------------'
@@ -178,11 +176,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                          |      |      |/       /         \      \ |      |      |
  *                          '---------------------'           '--------------------'
  */
-[FUN] = LAYOUT(
+[FUN] = LAYOUT_split_3x6_3(
     U_NU, KC_F12,  KC_F7,   KC_F8,   KC_F9,   KC_PSCR,          U_NU,    TG(_QWERTY),   TG(_GAME), KC_CALC, U_NA, U_NA,\
-    U_NU, KC_F11,  KC_F4,   KC_F5,   KC_F6,   KC_SLCK,          U_NU,    KC_LSFT,       KC_LCTL,   KC_LALT, KC_LGUI, U_NU, \
+    U_NU, KC_F11,  KC_F4,   KC_F5,   KC_F6,   U_NU,             U_NU,    KC_LSFT,       KC_LCTL,   KC_LALT, KC_LGUI, U_NU, \
     U_NU, KC_F10,  KC_F1,   KC_F2,   KC_F3,   KC_PAUS,          U_NA,    KC_RSFT,       KC_RCTL,   KC_RALT, KC_RGUI, U_NU, \
-                            KC_APP,  U_NU,    U_NU,             U_NA,    U_NA,    U_NA, \
+                            KC_APP,  U_NU,    U_NU,             U_NA,    U_NA,    U_NA
   )
 };
 
@@ -571,11 +569,13 @@ void render_status_main(void) {
     /* Display the layer lock*/
     if(is_a_layer_locked) {
         oled_write_ln("LOCK",false); 
+    } else {
+        oled_write_ln("",false);  
     }
 
 
   
-  oled_set_cursor(0,7);
+  oled_set_cursor(0,3);
   
   render_space();
   render_space();
@@ -665,7 +665,7 @@ void matrix_scan_user(void) {
 
 void layer_lock_set_user(layer_state_t locked_layers) {
   // Toggle a boolean for locked state
-  is_a_layer_locked = !is_layer_locked;
+  is_a_layer_locked = !is_a_layer_locked;
 }
 
 //Template

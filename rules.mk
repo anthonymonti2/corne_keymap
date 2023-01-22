@@ -29,7 +29,7 @@ DEBOUNCE_TYPE = sym_eager_pk
 
 #CONSOLE_ENABLE = yes
 
-SRC += caps_word.c
+SRC += caps_word.c layer_lock.c
 
 # Bootloader selection
-#BOOTLOADER = atmel-dfu 
+BOOTLOADER = atmel-dfu 

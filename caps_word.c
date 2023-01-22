@@ -60,6 +60,6 @@ bool process_caps_word(uint16_t keycode, keyrecord_t* record) {
   return true;
 }
 
-bool get_shifted_state() {
+bool get_shifted_state(void) {
   return caps_word_enabled;
 }
