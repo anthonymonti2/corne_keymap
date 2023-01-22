@@ -39,10 +39,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 [_COLEMAK] = LAYOUT_split_3x6_3( \
-  KC_LALT,   KC_Q,   KC_W,    KC_F,    KC_P,    KC_B,                     KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN , KC_MINS, \
-  KC_LCTL, KC_A,   KC_R,    KC_S,    KC_T,    KC_G,                     KC_M,    KC_N,    KC_E,    KC_I,    KC_O    , KC_QUOT,\
+  KC_LALT,  KC_Q,   KC_W,    KC_F,    KC_P,    KC_B,                     KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN , KC_MINS, \
+  KC_LCTL,  KC_A,   KC_R,    KC_S,    KC_T,    KC_G,                     KC_M,    KC_N,    KC_E,    KC_I,    KC_O    , KC_QUOT,\
   KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_D,    KC_V,                     KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH , KC_RSFT,\
-        LT(MEDIA, KC_ESC), LT(NAV, KC_TAB), KC_SPC , LT(SYM, KC_ENT), LT(NUM, KC_BSPC), LT(FUN, KC_DEL)                       
+                  KC_ESC, LT(MEDIA, KC_TAB), LT(NAV, KC_SPC), LT(SYM, KC_ENT), LT(NUM, KC_BSPC), LT(FUN, KC_DEL)               
 ),
 /* QWERTY
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -113,7 +113,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * | LL   |  +   |  1   |  2   |  3   |  /   |                    |      | RSFT | RCTRL| RALT | RGUI |      |
  * `-----------------------------------------/-------.     .------\-----------------------------------------'
- *                          |  .   |  0   | /   -   /       \      \  |      |      |
+ *                          |  .   |  -   | /   0   /       \      \  |      |      |
  *                          |      |      |/       /         \      \ |      |      |
  *                          '---------------------'           '--------------------'
  */
@@ -121,7 +121,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRNS,KC_LBRC, KC_7,    KC_8,    KC_9,    KC_RBRC,         U_NU,    U_NU,    U_NU,    U_NU,    U_NU,    U_NU, \
     KC_TRNS,KC_SCLN, KC_4,    KC_5,    KC_6,    KC_EQL,          LLOCK,   KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, U_NU,\
     KC_TRNS,KC_PLUS, KC_1,    KC_2,    KC_3,    KC_BSLS,         U_NA,    KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, U_NU,\
-                                KC_DOT,  KC_0,    KC_MINS, U_NA,    U_NA,    U_NA
+                                KC_DOT,  KC_MINS,  KC_0,     U_NA,    U_NA,    U_NA
   ),
 
 /* SYMBOLs
@@ -571,6 +571,12 @@ void render_status_main(void) {
         oled_write_ln("LOCK",false); 
     } else {
         oled_write_ln("",false);  
+    }
+
+    if (host_keyboard_led_state().caps_lock == 1) {   
+        oled_write_ln("CAPS",false);
+    } else {
+        oled_write_ln("",false); 
     }
 
 
