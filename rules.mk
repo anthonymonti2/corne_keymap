@@ -15,7 +15,7 @@ UNICODE_ENABLE = no         # Unicode
 BLUETOOTH_ENABLE = no       # Enable Bluetooth with the Adafruit EZ-Key HID
 RGBLIGHT_ENABLE = no        # Enable WS2812 RGB underlight. 
 SWAP_HANDS_ENABLE = no      # Enable one-hand typing
-OLED_ENABLE = yes     # OLED display
+OLED_ENABLE = no     # OLED display
 WPM_ENABLE = yes            # Enable WPM calc
 AUTO_SHIFT_ENABLE = no     # Enable auto shift
 # Do not enable SLEEP_LED_ENABLE. it uses the same timer as BACKLIGHT_ENABLE
@@ -32,4 +32,4 @@ DEBOUNCE_TYPE = sym_eager_pk
 SRC += caps_word.c layer_lock.c
 
 # Bootloader selection
-BOOTLOADER = atmel-dfu 
+#BOOTLOADER = atmel-dfu 
