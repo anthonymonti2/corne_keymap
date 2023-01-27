@@ -63,5 +63,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define U_NP KC_NO // key is not present
 #define U_NA KC_NO // present but not available for use
 #define U_NU KC_NO // available but not used
+#define U_REDO C(KC_Y)
+#define U_PSTE C(KC_V)
+#define U_COPY C(KC_C)
+#define U_CUT C(KC_X)
+#define U_UNDO C(KC_Z) 
 
 #define U_WINLK LGUI(KC_L) // Windows key & l for locking PC

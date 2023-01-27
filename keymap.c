@@ -9,7 +9,8 @@
 enum layer_number {
   _COLEMAK = 0,
   _QWERTY,
-  _GAME,
+  _CGAME,
+  _QGAME,
   NAV,
   NUM,
   MEDIA,
@@ -63,7 +64,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B,                     KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,  KC_RSFT, \
                            _______, _______, _______, _______,  _______, _______
 ),
-/* GAME
+/* COLEMAK GAME
+ * ,-----------------------------------------.                    ,-----------------------------------------.
+ * | ALT  |  Q   |  W   |  F   |  P   |  B   |                    |  J   |  L   |  U   |  Y   |  ;   |  -   |
+ * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ * | LCRTL|  A   |  R   |  S   |  T   |  G   |                    |  M   |  N   |  E   |  I   |  O   |  '   |
+ * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ * | LSFT |  Z   |  X   |  C   |  D   |  V   |                    |  K   |  H   |  ,   |  .   |  /   | RSFT |
+ * `-----------------------------------------/-------.     .------\-----------------------------------------'
+ *                          | ESC  | SPC  | / TAB   /       \ ENTR \  | BSPCE| DEL  |
+ *                          |      |      |/       /         \      \ |      |      |
+ *                          '---------------------'           '--------------------'
+ */
+
+[_COLEMAK] = LAYOUT_split_3x6_3( \
+  KC_LALT,  KC_Q,   KC_W,    KC_F,    KC_P,    KC_B,                     KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN , KC_MINS, \
+  KC_LCTL,  KC_A,   KC_R,    KC_S,    KC_T,    KC_G,                     KC_M,    KC_N,    KC_E,    KC_I,    KC_O    , KC_QUOT,\
+  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_D,    KC_V,                     KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH , KC_RSFT,\
+                                    KC_ESC, KC_LALT, KC_SPC, KC_ENT,  KC_BSPC, _______               
+),
+/* QWERTY GAME
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * | Tab  |   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  |  -   |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
@@ -76,9 +96,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                          '---------------------'           '--------------------'
  */
 
- [_GAME] = LAYOUT_split_3x6_3( \
+ [_QGAME] = LAYOUT_split_3x6_3( \
   KC_TAB  ,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS, \
-  KC_LCTL,   KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, \
+  KC_LCTL,    KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, \
   KC_LSFT,    KC_Z,   KC_X,    KC_C,    KC_V,    KC_B,                      KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,  KC_RSFT, \
                                 KC_ESC, KC_LALT, KC_SPC, KC_ENT,  KC_BSPC, _______
 ),
@@ -98,8 +118,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                          '---------------------'           '--------------------'
  */
 [NAV] = LAYOUT_split_3x6_3(\
-    U_NU, U_NU,    U_NU,    U_NU,    U_NU,    U_NU,                KC_AGIN, KC_PSTE, KC_UP,   KC_CUT,  KC_UNDO, U_NU, \
-    U_NU, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, LLOCK,               KC_CAPS, KC_LEFT, KC_DOWN, KC_RGHT, KC_COPY, U_NU, \
+    U_NU, U_NU,    U_NU,    U_NU,    U_NU,    U_NU,                U_REDO,  U_PSTE,  KC_UP,   U_CUT,   U_UNDO, U_NU, \
+    U_NU, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, LLOCK,               KC_CAPS, KC_LEFT, KC_DOWN, KC_RGHT, U_COPY, U_NU, \
     U_NU, KC_RGUI, KC_RALT, KC_RCTL, KC_RSFT, U_NU,                KC_INS,  KC_HOME, KC_PGUP, KC_PGDN, KC_END,  U_NU, \
                                      U_NA,    U_NA, U_NA, KC_ENT,  KC_BSPC, KC_DEL
     ),
@@ -113,7 +133,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * | LL   |  +   |  1   |  2   |  3   |  /   |                    |      | RSFT | RCTRL| RALT | RGUI |      |
  * `-----------------------------------------/-------.     .------\-----------------------------------------'
- *                          |  .   |  -   | /   0   /       \      \  |      |      |
+ *                          |  .   |  0   | /   -   /       \      \  |      |      |
  *                          |      |      |/       /         \      \ |      |      |
  *                          '---------------------'           '--------------------'
  */
@@ -121,7 +141,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRNS,KC_LBRC, KC_7,    KC_8,    KC_9,    KC_RBRC,         U_NU,    U_NU,    U_NU,    U_NU,    U_NU,    U_NU, \
     KC_TRNS,KC_SCLN, KC_4,    KC_5,    KC_6,    KC_EQL,          LLOCK,   KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, U_NU,\
     KC_TRNS,KC_PLUS, KC_1,    KC_2,    KC_3,    KC_BSLS,         U_NA,    KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, U_NU,\
-                                KC_DOT,  KC_MINS,  KC_0,     U_NA,    U_NA,    U_NA
+                                KC_DOT,  KC_0,  KC_MINS,     U_NA,    U_NA,    U_NA
   ),
 
 /* SYMBOLs
@@ -158,7 +178,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [MEDIA] = LAYOUT_split_3x6_3(
     U_NU ,U_NU,    U_NU,    U_NU,    U_NU,    U_NU,             U_NU,    U_WINLK, U_NU,    U_NU,    U_NU,    U_NU , \
-    U_NU ,KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, LLOCK,            U_NU,    KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, U_NU , \
+    U_NU ,KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, LLOCK,            LLOCK,   KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, U_NU , \
     U_NU, KC_RGUI, KC_RALT, KC_RCTL, KC_RSFT, U_NU,             U_NU,    U_NU,    U_NU,    U_NU,    U_NU,    U_NU , \
                             U_NA,    U_NA,    U_NA,         KC_MSTP, KC_MPLY, KC_MUTE
     ),
@@ -177,7 +197,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                          '---------------------'           '--------------------'
  */
 [FUN] = LAYOUT_split_3x6_3(
-    U_NU, KC_F12,  KC_F7,   KC_F8,   KC_F9,   KC_PSCR,          U_NU,    TG(_QWERTY),   TG(_GAME), KC_CALC, U_NA, U_NA,\
+    U_NU, KC_F12,  KC_F7,   KC_F8,   KC_F9,   KC_PSCR,          KC_CALC, TG(_QWERTY),   TG(_QGAME), TG(_CGAME), U_NA, U_NA,\
     U_NU, KC_F11,  KC_F4,   KC_F5,   KC_F6,   U_NU,             U_NU,    KC_LSFT,       KC_LCTL,   KC_LALT, KC_LGUI, U_NU, \
     U_NU, KC_F10,  KC_F1,   KC_F2,   KC_F3,   KC_PAUS,          U_NA,    KC_RSFT,       KC_RCTL,   KC_RALT, KC_RGUI, U_NU, \
                             KC_APP,  U_NU,    U_NU,             U_NA,    U_NA,    U_NA
@@ -559,9 +579,10 @@ void render_status_main(void) {
     /* Display the letter layout */
     if(layer_state_is(_QWERTY)) {
         oled_write_ln("QWER",false);
-    }
-    else if(layer_state_is(_GAME)) {
-        oled_write_ln("GAME",false);
+    } else if(layer_state_is(_QGAME)) {
+        oled_write_ln("QGAME",false);
+    } else if(layer_state_is(_CGAME)) {
+        oled_write_ln("CGAME",false);
     } else {
         oled_write_ln("",false);  
     }
@@ -639,14 +660,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 isSneaking = false;
             }
             break;
-        case KC_SPC:
-            if (record->event.pressed) {
-                isJumping = true;
-                showedJump = false;
-            } else {
-                isJumping = false;
-            }
-            break;
+        // Disable jumping as it looks weird
+        // case KC_SPC:
+        //     if (record->event.pressed) {
+        //         isJumping = true;
+        //         showedJump = false;
+        //     } else {
+        //         isJumping = false;
+        //     }
+        //     break;
         #endif
         /* KEYBOARD PET STATUS END */
     }
