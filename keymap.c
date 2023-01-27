@@ -77,7 +77,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                          '---------------------'           '--------------------'
  */
 
-[_COLEMAK] = LAYOUT_split_3x6_3( \
+[_CGAME] = LAYOUT_split_3x6_3( \
   KC_LALT,  KC_Q,   KC_W,    KC_F,    KC_P,    KC_B,                     KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN , KC_MINS, \
   KC_LCTL,  KC_A,   KC_R,    KC_S,    KC_T,    KC_G,                     KC_M,    KC_N,    KC_E,    KC_I,    KC_O    , KC_QUOT,\
   KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_D,    KC_V,                     KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH , KC_RSFT,\
@@ -376,7 +376,7 @@ static void render_luna(int LUNA_X, int LUNA_Y) {
         current_frame = (current_frame + 1) % 2;
 
         /* current status */
-        if(led_usb_state.caps_lock) {
+        if(host_keyboard_led_state().caps_lock == 1) {
             oled_write_raw_P(bark[abs(1 - current_frame)], ANIM_SIZE);
 
         } else if(isSneaking) {
@@ -588,7 +588,7 @@ void render_status_main(void) {
     }
 
     /* Display the layer lock*/
-    if(is_a_layer_locked) {
+    if(is_any_layer_locked()) {
         oled_write_ln("LOCK",false); 
     } else {
         oled_write_ln("",false);  
@@ -691,10 +691,10 @@ void matrix_scan_user(void) {
 
 }
 
-void layer_lock_set_user(layer_state_t locked_layers) {
-  // Toggle a boolean for locked state
-  is_a_layer_locked = !is_a_layer_locked;
-}
+// void layer_lock_set_user(layer_state_t locked_layers) {
+//   // Toggle a boolean for locked state
+//   is_a_layer_locked = !is_a_layer_locked;
+// }
 
 //Template
 /*

@@ -101,6 +101,9 @@ void layer_lock_all_off(void);
 /** Toggles whether `layer` is locked. */
 void layer_lock_invert(uint8_t layer);
 
+/** Get if any layer is locked */
+bool is_any_layer_locked(void);
+
 /**
  * Optional callback that gets called when a layer is locked or unlocked.
  *

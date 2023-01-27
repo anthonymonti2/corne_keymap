@@ -124,4 +124,7 @@ void layer_lock_all_off(void) {
   locked_layers = 0;
 }
 
+bool is_any_layer_locked(void) {
+  return locked_layers > 0;
+}
 __attribute__((weak)) void layer_lock_set_user(layer_state_t locked_layers) {}
