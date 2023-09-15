@@ -38,14 +38,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // Change debounce time for eager
 #undef DEBOUNCE
-#define DEBOUNCE 20
+#define DEBOUNCE 10
 
 // default but used in macros
 #undef TAPPING_TERM
 #define TAPPING_TERM 200
-
-// Prevent normal rollover on alphas from accidentally triggering mods.
-#define IGNORE_MOD_TAP_INTERRUPT
 
 // If a second key is pressed when holding a dual action key it will
 // send the hold action key immediatly
@@ -68,5 +65,4 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define U_COPY C(KC_C)
 #define U_CUT C(KC_X)
 #define U_UNDO C(KC_Z) 
-
 #define U_WINLK LGUI(KC_L) // Windows key & l for locking PC

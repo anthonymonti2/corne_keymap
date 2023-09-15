@@ -168,7 +168,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * |      |      |      |      |      |      |                    |      | WINL |      |      |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      | LGUI | LALT | LCTRL| LSFT | LOCK |                    |      | REWD | VOLU | VOLD | FORW |      |
+ * |      | LGUI | LALT | LCTRL| LSFT | LOCK |                    |      | REWD | VOLD | VOLU | FORW |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |      | RGUI | RALT | RCTRL| RSFT |      |                    |      |      |      |      |      |      |
  * `-----------------------------------------/-------.     .------\-----------------------------------------'
@@ -178,7 +178,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [MEDIA] = LAYOUT_split_3x6_3(
     U_NU ,U_NU,    U_NU,    U_NU,    U_NU,    U_NU,             U_NU,    U_WINLK, U_NU,    U_NU,    U_NU,    U_NU , \
-    U_NU ,KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, LLOCK,            LLOCK,   KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, U_NU , \
+    U_NU ,KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, LLOCK,            U_NU,    KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, U_NU , \
     U_NU, KC_RGUI, KC_RALT, KC_RCTL, KC_RSFT, U_NU,             U_NU,    U_NU,    U_NU,    U_NU,    U_NU,    U_NU , \
                             U_NA,    U_NA,    U_NA,         KC_MSTP, KC_MPLY, KC_MUTE
     ),
@@ -393,20 +393,21 @@ static void render_luna(int LUNA_X, int LUNA_Y) {
         }
     }
 
+    #if OLED_TIMEOUT > 0
+    /* the animation prevents the normal timeout from occuring */
+    if (last_input_activity_elapsed() > OLED_TIMEOUT && last_led_activity_elapsed() > OLED_TIMEOUT) {
+        oled_off();
+        return;
+    } else {
+        oled_on();
+    }
+    #endif
+
     /* animation timer */
     if(is_oled_on() &&timer_elapsed32(anim_timer) > ANIM_FRAME_DURATION) {
         anim_timer = timer_read32();
         animate_luna();
     }
-
-    /* this fixes the screen on and off bug */
-    if (current_wpm > 0) {
-        oled_on();
-        anim_sleep = timer_read32();
-    } else if(timer_elapsed32(anim_sleep) > OLED_TIMEOUT) {
-        oled_off();
-    }
-
 }
 
 // /* KEYBOARD PET END */
@@ -641,9 +642,6 @@ bool oled_task_user(void) {
   return true;
 }
 
-void suspend_power_down_user(void) {
-    oled_off();
-}
 #endif // OLED_DRIVER_ENABLE
 
 uint8_t mod_state;
@@ -686,15 +684,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 // For layer lock. Need to add timeout every scan cycle
-void matrix_scan_user(void) {
-  layer_lock_task();
-
+// Run time based events at then end of each update cycle
+void housekeeping_task_user(void) {
+    layer_lock_task();
 }
 
-// void layer_lock_set_user(layer_state_t locked_layers) {
-//   // Toggle a boolean for locked state
-//   is_a_layer_locked = !is_a_layer_locked;
-// }
+// Tasks to do when the keyboard is told the system is idle
+void suspend_power_down_user(void) {
+    #ifdef OLED_DRIVER_ENABLE
+    oled_off();
+    #endif
+
+    // Reset layer back to default
+    layer_clear();
+
+}
 
 //Template
 /*

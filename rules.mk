@@ -23,9 +23,7 @@ SLEEP_LED_ENABLE = no    # Breathing sleep LED during USB suspend
 
 LTO_ENABLE = yes
 
-#sym_defer_g
-DEBOUNCE_TYPE = sym_eager_pk
-#sym_eager_pk
+DEBOUNCE_TYPE = asym_eager_defer_pk
 
 #CONSOLE_ENABLE = yes
 
