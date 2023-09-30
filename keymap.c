@@ -87,9 +87,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * | Tab  |   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  |  -   |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |LCTRL |   A  |   S  |   D  |   F  |   G  |                    |   H  |   J  |   K  |   L  |   ;  |  '   |
+ * |LCTRL |   A  |   S  |   D  |   F  |   G  |                    |   H  |   J  |   K  |   L  |  UP  |  '   |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |LShift|   Z  |   X  |   C  |   V  |   B  |                    |   N  |   M  |   ,  |   .  |   /  |RShift|
+ * |LShift|   Z  |   X  |   C  |   V  |   B  |                    |   N  |   M  |   ,  | LEFT | DOWN | RGHT |
  * `-----------------------------------------/------.       .-----\-----------------------------------------'
  *                          | ESC  | LALT | / SPCE  /       \ ENTR \  | BSPCE| DEL  |
  *                          |      |      |/       /         \      \ |      |      |
@@ -98,8 +98,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
  [_QGAME] = LAYOUT_split_3x6_3( \
   KC_TAB  ,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS, \
-  KC_LCTL,    KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, \
-  KC_LSFT,    KC_Z,   KC_X,    KC_C,    KC_V,    KC_B,                      KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,  KC_RSFT, \
+  KC_LCTL,    KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L,    KC_UP,   KC_QUOT, \
+  KC_LSFT,    KC_Z,   KC_X,    KC_C,    KC_V,    KC_B,                     KC_N,    KC_M,    KC_COMM, KC_LEFT, KC_DOWN, KC_RIGHT, \
                                 KC_ESC, KC_LALT, KC_SPC, KC_ENT,  KC_BSPC, _______
 ),
 // Need the del key to be transparent so we can use the func layer
@@ -148,7 +148,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * |   \  |   ^  |   *  |  [|{ |  }|] |   &  |                    |      |      |      |      |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |   ~  |   :  |   _  |   (  |   )  |   /  |-------.    ,-------|      |LShift| LCtrl| LAlt | LGUI |      |
+ * |   ~  |   :  |   _  |   (  |   )  |   /  |-------.    ,-------| LOCK |LShift| LCtrl| LAlt | LGUI |      |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
  * |   `  |   @  |   !  |   +  |   =  |  |   |-------|    |-------|      | RSFT | RCTRL| RALT | RGUI |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
@@ -186,7 +186,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //FUNCTION
 /*
  * ,-----------------------------------------.                    ,-----------------------------------------.
- * |      |  F12 |  F7  |  F8  |  F9  | PSCR |                    |      |      |      |      |      |      |
+ * |      |  F12 |  F7  |  F8  |  F9  | PSCR |                    | CALC |QWERTY| QGME | CGME |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |      |  F11 |  F4  |  F5  |  F6  |      |                    | LOCK | LSFT | LCTRL| LALT | LGUI |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
@@ -198,7 +198,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [FUN] = LAYOUT_split_3x6_3(
     U_NU, KC_F12,  KC_F7,   KC_F8,   KC_F9,   KC_PSCR,          KC_CALC, TG(_QWERTY),   TG(_QGAME), TG(_CGAME), U_NA, U_NA,\
-    U_NU, KC_F11,  KC_F4,   KC_F5,   KC_F6,   U_NU,             U_NU,    KC_LSFT,       KC_LCTL,   KC_LALT, KC_LGUI, U_NU, \
+    U_NU, KC_F11,  KC_F4,   KC_F5,   KC_F6,   U_NU,             LLOCK,   KC_LSFT,       KC_LCTL,   KC_LALT, KC_LGUI, U_NU, \
     U_NU, KC_F10,  KC_F1,   KC_F2,   KC_F3,   KC_PAUS,          U_NA,    KC_RSFT,       KC_RCTL,   KC_RALT, KC_RGUI, U_NU, \
                             KC_APP,  U_NU,    U_NU,             U_NA,    U_NA,    U_NA
   )

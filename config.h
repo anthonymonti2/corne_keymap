@@ -27,7 +27,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // #define EE_HANDS
 
 #undef OLED_FONT_H
-//#define OLED_FONT_H "keyboards/lily58/keymaps/lily58-corne-version/glcdfont.c"
 #define OLED_FONT_H "keyboards/crkbd/keymaps/monti-corne/glcdfont.c"
 
 #define OLED_TIMEOUT 30000
