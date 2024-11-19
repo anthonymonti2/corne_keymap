@@ -20,14 +20,14 @@ WPM_ENABLE = yes            # Enable WPM calc
 AUTO_SHIFT_ENABLE = no     # Enable auto shift
 # Do not enable SLEEP_LED_ENABLE. it uses the same timer as BACKLIGHT_ENABLE
 SLEEP_LED_ENABLE = no    # Breathing sleep LED during USB suspend
-
 LTO_ENABLE = yes
+CAPS_WORD_ENABLE = yes
 
 DEBOUNCE_TYPE = asym_eager_defer_pk
 
-#CONSOLE_ENABLE = yes
+# If you want to change the display of OLED, you need to change here
+SRC +=  layer_lock.c
 
-SRC += caps_word.c layer_lock.c
-
+# If using elite c uncomment line 33
 # Bootloader selection
 BOOTLOADER = atmel-dfu 
