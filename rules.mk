@@ -30,4 +30,4 @@ SRC +=  layer_lock.c
 
 # If using elite c uncomment line 33
 # Bootloader selection
-BOOTLOADER = atmel-dfu 
+#BOOTLOADER = atmel-dfu 
