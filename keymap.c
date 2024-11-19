@@ -29,7 +29,7 @@ const char PROGMEM LAYER_NAME_NUM[] = "NUM";
 const char PROGMEM LAYER_NAME_MEDIA[] = "MEDIA";
 const char PROGMEM LAYER_NAME_SYMBOL[] = "SYMB";
 const char PROGMEM LAYER_NAME_FUNCTION[] = "FUNC";
-const char PROGMEM LAYER_NAME_UNDEF = "UNDEF";
+const char PROGMEM LAYER_NAME_UNDEF[] = "UNDEF";
 
 //"CGAME", "QGAME", "NAV", "NUM", "MEDIA", "SYMB", "FUNC"
 const char* LAYER_NAME[] = {
@@ -40,10 +40,10 @@ const char* LAYER_NAME[] = {
     LAYER_NAME_FUNCTION, LAYER_NAME_UNDEF
 };
 
-sizeof(arr)/sizeof(LAYER_NAME[0]);
-
+// Todo: Make compile time assert to check number of layer names to layers
+//sizeof(arr)/sizeof(LAYER_NAME[0]);
 // Checking to see if the number of layers matches the layer name list
-__Static_assert((sizeof(arr)/sizeof(LAYER_NAME[0])) != LAYER_NUMBER_MAX)
+//__Static_assert((sizeof(arr)/sizeof(LAYER_NAME[0])) != LAYER_NUMBER_MAX)
 
 enum custom_keycodes {
   LLOCK = SAFE_RANGE,
@@ -229,7 +229,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |      |  F11 |  F4  |  F5  |  F6  | APP  |                    | LOCK | LSFT | LCTRL| LALT | LGUI |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |  F10 |  F1  |  F2  |  F3  | PAUSE|                    |      | RSFT | RCTRL| RALT | RGUI |      |
+ * |      |  F10 |  F1  |  F2  |  F3  | PAUSE|                    | NKRO | RSFT | RCTRL| RALT | RGUI |      |
  * `-----------------------------------------/-------.     .------\-----------------------------------------'
  *                          |      |      | /       /       \      \  |      |      |
  *                          |      |      |/       /         \      \ |      |      |
@@ -237,9 +237,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [FUN] = LAYOUT_split_3x6_3(
     U_NU, KC_F12,  KC_F7,   KC_F8,   KC_F9,   KC_PSCR,          KC_CALC, TG(_QWERTY),   TG(_QGAME), TG(_CGAME), U_NA, U_NA,\
-    U_NU, KC_F11,  KC_F4,   KC_F5,   KC_F6,   KC_APP,             LLOCK,   KC_LSFT,       KC_LCTL,   KC_LALT, KC_LGUI, U_NU, \
-    U_NU, KC_F10,  KC_F1,   KC_F2,   KC_F3,   KC_PAUS,          U_NA,    KC_RSFT,       KC_RCTL,   KC_RALT, KC_RGUI, U_NU, \
-                            U_NU ,  U_NU,    U_NU,             U_NA,    U_NA,    U_NA
+    U_NU, KC_F11,  KC_F4,   KC_F5,   KC_F6,   KC_APP,           LLOCK,   KC_LSFT,       KC_LCTL,   KC_LALT, KC_LGUI, U_NU, \
+    U_NU, KC_F10,  KC_F1,   KC_F2,   KC_F3,   KC_PAUS,          NK_TOGG, KC_RSFT,       KC_RCTL,   KC_RALT, KC_RGUI, U_NU, \
+                            U_NU ,  U_NU,    U_NU,              U_NA,    U_NA,    U_NA
   )
 };
 

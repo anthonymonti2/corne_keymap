@@ -21,19 +21,37 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #pragma once
 
 /* Select hand configuration */
+//#define MASTER_LEFT
+// Set up the master based on which side has USB input
+#define SPLIT_USB_DETECT
+#define SPLIT_USB_TIMEOUT 2000
+#define SPLIT_USB_TIMEOUT_POLL 10
+#define SPLIT_WATCHDOG_ENABLE
+#define SPLIT_WATCHDOG_TIMEOUT 3000
 
-#define MASTER_LEFT
-// #define MASTER_RIGHT
-// #define EE_HANDS
+// Send WPM to the other side
+#define SPLIT_WPM_ENABLE
+
+// Sync caps lock state between sides
+#define SPLIT_LED_STATE_ENABLE
+
+// Sync on off state of OLED
+#define SPLIT_OLED_ENABLE
+
+// Sync activity between halves for luna animation
+#define SPLIT_ACTIVITY_ENABLE
 
 #undef OLED_FONT_H
 #define OLED_FONT_H "keyboards/crkbd/keymaps/monti-corne/glcdfont.c"
 
-#define OLED_TIMEOUT 30000
-#define OLED_BRIGHTNESS 192 // d75%
+#define OLED_TIMEOUT 60000
 #define OLED_UPDATE_INTERVAL 100 //in ms
 
-#define LAYER_LOCK_IDLE_TIMEOUT 60000  // Turn off layer lock after 60 seconds.
+// Turn off layer lock after 60 seconds.
+#define LAYER_LOCK_IDLE_TIMEOUT 60000  
+
+// Caps word settings
+#define BOTH_SHIFTS_TURNS_ON_CAPS_WORD
 
 // Change debounce time for eager
 #undef DEBOUNCE
@@ -47,10 +65,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // send the hold action key immediatly
 #define PERMISSIVE_HOLD_PER_KEY
 
-// Auto Shift
-#define NO_AUTO_SHIFT_ALPHA
-#define AUTO_SHIFT_TIMEOUT TAPPING_TERM
-#define AUTO_SHIFT_NO_SETUP
+// // Auto Shift
+// #define NO_AUTO_SHIFT_ALPHA
+// #define AUTO_SHIFT_TIMEOUT TAPPING_TERM
+// #define AUTO_SHIFT_NO_SETUP
 
 // Recommended for heavy chording.
 #define QMK_KEYS_PER_SCAN 4
